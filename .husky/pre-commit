@@ -1,1 +1,9 @@
-npm  run lint
+
+
+
+# Check Prettier standards
+pnpm check:format ||
+(
+  echo '🤢🤮 Prettier Check Failed. Your code styling not looking good. 🤢🤮  Run pnpm format, add changes and try commit again.';
+  false;
+)
