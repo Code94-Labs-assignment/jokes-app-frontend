@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import theme from "@/theme";
+import theme from "@/assets/theme/theme";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NavBar from "@/components/navBar/NavBar";
@@ -27,7 +27,19 @@ export default function RootLayout({
         <ThemeProvider theme={theme}>
           <CssBaseline />
           {children}
-          <ToastContainer />
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            limit={2}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </ThemeProvider>
       </body>
     </html>

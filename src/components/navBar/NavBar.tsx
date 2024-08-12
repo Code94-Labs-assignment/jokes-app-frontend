@@ -3,10 +3,10 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 import Link from "next/link";
-
+import styles from "./NavBar.module.scss";
 const NavBar: React.FC = () => {
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#437EF7" }}>
+    <AppBar position="static" className={styles.nav}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Jokes App
@@ -20,6 +20,9 @@ const NavBar: React.FC = () => {
           </Button>
           <Button color="inherit" component={Link} href="/moderator">
             Moderator Dashboard
+          </Button>
+          <Button color="inherit" component={Link} href="/login">
+            login
           </Button>
         </Box>
       </Toolbar>

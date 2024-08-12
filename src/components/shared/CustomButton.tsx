@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 
 interface CustomButtonProps {
   text: string;
@@ -12,22 +12,27 @@ interface CustomButtonProps {
   textTransform?: "none" | "capitalize" | "uppercase" | "lowercase";
   variant?: "text" | "outlined" | "contained";
   onClick: () => void;
+  isLoading?: boolean;
+  fullWidth?: boolean; // New prop to indicate loading state
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   text,
   variant,
   size = "medium",
+  fullWidth = true,
   backgroundColor,
   color = "white",
   height = "2.125rem",
   textTransform = "capitalize",
   onClick,
+  isLoading = false, // Default to false if not provided
 }) => {
   return (
     <Button
       variant={variant}
       sx={{
+        margin: "0.5rem",
         background: backgroundColor,
         color: color,
         minWidth:
@@ -36,14 +41,28 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         textTransform: textTransform,
         borderRadius: "5px",
         border: variant === "outlined" ? "1px solid #437EF7" : "none",
+        position: "relative", // To position the loader correctly
         "&:hover": {
-          backgroundColor: "white",
-          color: "#437EF7",
+          backgroundColor: "#437EF7",
         },
       }}
       onClick={onClick}
+      disabled={isLoading} // Disable button if loading
     >
-      {text}
+      {isLoading ? (
+        <>
+          <CircularProgress
+            size={24}
+            sx={{
+              color: variant === "outlined" ? "#437EF7" : color,
+              marginRight: "8px",
+            }}
+          />
+          Loading...
+        </>
+      ) : (
+        text
+      )}
     </Button>
   );
 };
