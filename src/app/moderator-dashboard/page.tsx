@@ -70,14 +70,18 @@ const ModeratorDashboard = () => {
     },
   };
   const isAuthenticated = useRequireAuth();
-  const [jokeFormData, setJokeFormData] = useState<JokeSubmitFormDto>(INITIAL_JOKE_FORM_DATA);
+  const [jokeFormData, setJokeFormData] = useState<JokeSubmitFormDto>(
+    INITIAL_JOKE_FORM_DATA,
+  );
   const [jockTypes, setJockTypes] = useState<JokeTypeDto[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [helperText, setHelperText] = useState(true);
   const [mode, setMode] = useState(SCREEN_MODES.EDIT);
   const [isHavePendingJoke, setIsHavePendingJoke] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-  const [actionToConfirm, setActionToConfirm] = useState<"approve" | "reject">();
+  const [actionToConfirm, setActionToConfirm] = useState<
+    "approve" | "reject"
+  >();
 
   useEffect(() => {
     getJockTypes();
@@ -87,8 +91,6 @@ const ModeratorDashboard = () => {
   if (!isAuthenticated) {
     return null;
   }
-
-
 
   const getJockTypes = () => {
     jokeService.getJokeTypes().then((response) => {
@@ -138,7 +140,7 @@ const ModeratorDashboard = () => {
   const handleInputChange = (field: keyof JokeFormDto, value: string) => {
     if (field === "type") {
       const selectedType: JokeTypeDto | undefined = jockTypes.find(
-        (type: JokeTypeDto) => type._id === value
+        (type: JokeTypeDto) => type._id === value,
       );
       setJokeFormData({
         ...jokeFormData,
@@ -314,6 +316,5 @@ const ModeratorDashboard = () => {
 };
 
 export default dynamic(() => Promise.resolve(ModeratorDashboard), {
-    ssr: false,
-  });
-
+  ssr: false,
+});
