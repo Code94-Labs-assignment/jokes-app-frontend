@@ -6,14 +6,20 @@ import styles from "./Footer.module.scss";
 
 const Footer: React.FC = () => {
   return (
-    <Box className={styles.footer} component="footer" sx={{ padding: "20px", backgroundColor: "#0C0457", color: "white" }}>
+    <Box
+      className={styles.footer}
+      component="footer"
+      sx={{ padding: "20px", backgroundColor: "#0C0457", color: "white" }}
+    >
       <Grid container spacing={3}>
         <Grid item xs={12} sm={4}>
           <Typography variant="h6" gutterBottom>
             About Us
           </Typography>
           <Typography variant="body2">
-            We are passionate about sharing jokes with the world. Our platform allows users to submit their funniest jokes and lets moderators ensure the best content is delivered.
+            We are passionate about sharing jokes with the world. Our platform
+            allows users to submit their funniest jokes and lets moderators
+            ensure the best content is delivered.
           </Typography>
         </Grid>
         <Grid item xs={12} sm={4}>
@@ -36,12 +42,8 @@ const Footer: React.FC = () => {
           <Typography variant="h6" gutterBottom>
             Contact Us
           </Typography>
-          <Typography variant="body2">
-            Email: contact@jokesapp.com
-          </Typography>
-          <Typography variant="body2">
-            Phone: +1 (123) 456-7890
-          </Typography>
+          <Typography variant="body2">Email: contact@jokesapp.com</Typography>
+          <Typography variant="body2">Phone: +1 (123) 456-7890</Typography>
         </Grid>
       </Grid>
       <Box sx={{ textAlign: "center", marginTop: "20px" }}>

@@ -27,7 +27,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   height = "2.125rem",
   textTransform = "capitalize",
   onClick,
-  hoverBackGroundColor="#437EF7",
+  hoverBackGroundColor = "#437EF7",
   isLoading = false, // Default to false if not provided
 }) => {
   return (
@@ -46,7 +46,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         border: variant === "outlined" ? "1px solid #437EF7" : "none",
         position: "relative", // To position the loader correctly
         "&:hover": {
-          backgroundColor:hoverBackGroundColor,
+          backgroundColor: hoverBackGroundColor,
         },
       }}
       onClick={onClick}

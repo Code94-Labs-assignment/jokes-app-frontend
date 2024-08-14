@@ -1,8 +1,20 @@
-
 import React from "react";
-import { Grid, Box, MenuItem, Select, FormControl, InputLabel, FormHelperText, TextField } from "@mui/material";
+import {
+  Grid,
+  Box,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  FormHelperText,
+  TextField,
+} from "@mui/material";
 import CustomButton from "@/components/shared/CustomButton";
-import { JokeFormDto, JokeSubmitFormDto, JokeTypeDto } from "@/utilities/models/joke.model";
+import {
+  JokeFormDto,
+  JokeSubmitFormDto,
+  JokeTypeDto,
+} from "@/utilities/models/joke.model";
 
 interface JokeFormProps {
   jokeForm: JokeSubmitFormDto;
@@ -67,7 +79,9 @@ const JokeForm: React.FC<JokeFormProps> = ({
               value={jokeForm.type.value._id || ""}
               label="Joke Type"
               onFocus={() => handleInputFocus("type")}
-              onChange={(event) => onInputHandleChange('type', event.target.value)}
+              onChange={(event) =>
+                onInputHandleChange("type", event.target.value)
+              }
               error={!!jokeForm.type.error}
               disabled={jokeForm.type.disable}
             >
@@ -78,7 +92,9 @@ const JokeForm: React.FC<JokeFormProps> = ({
               ))}
             </Select>
             {helperText && jokeForm.type.error && (
-              <FormHelperText sx={{ color: "#FF0001" }}>{jokeForm.type.error}</FormHelperText>
+              <FormHelperText sx={{ color: "#FF0001" }}>
+                {jokeForm.type.error}
+              </FormHelperText>
             )}
           </FormControl>
         </Grid>

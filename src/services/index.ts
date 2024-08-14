@@ -1,6 +1,6 @@
 import axios from "axios";
 import { exceptionHandler } from "../core";
-import { clearAuthData  } from "../core/authUtils";
+import { clearAuthData } from "../core/authUtils";
 
 // 1. Deliver Jokes Microservice (No Auth Required)
 export const axiosDeliverJokesInstance = axios.create({
@@ -32,7 +32,7 @@ axiosModerateJokesInstance.interceptors.response.use(
   (response: any) => response,
   async (error: { response: any }) => {
     if (error.response && error.response.status === 401) {
-      clearAuthData ();
+      clearAuthData();
     }
     return Promise.reject(await exceptionHandler(error.response));
   },

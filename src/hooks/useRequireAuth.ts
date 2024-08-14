@@ -1,14 +1,13 @@
-
 import { useEffect } from "react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/zustandStore/useAuthStore";
 
 const useRequireAuth = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-const router = useRouter();
+  const router = useRouter();
   useEffect(() => {
     if (!isAuthenticated) {
-        router.push("/login");
+      router.push("/login");
     }
   }, [isAuthenticated, router]);
 

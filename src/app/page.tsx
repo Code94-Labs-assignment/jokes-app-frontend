@@ -39,7 +39,7 @@ const INITIAL_JOKE_FORM_DATA: JokeFormDto = {
     error: null,
   },
   type: {
-    value: "" , 
+    value: "",
     isRequired: true,
     disable: false,
     readonly: false,
@@ -57,22 +57,22 @@ const INITIAL_JOKE_FORM_DATA: JokeFormDto = {
 };
 
 export default function Home() {
-   const [jokeFormData, setJokeFormData] = useState<JokeFormDto>(INITIAL_JOKE_FORM_DATA);
-   const [jockTypes, setJockTypes] = useState<JokeTypeDto[]>([]);
-   const [selectedJokeType, setSelectedJokeType] = useState<string>("");
-   const [isLoading, setIsLoading] = useState(false);
+  const [jokeFormData, setJokeFormData] = useState<JokeFormDto>(
+    INITIAL_JOKE_FORM_DATA,
+  );
+  const [jockTypes, setJockTypes] = useState<JokeTypeDto[]>([]);
+  const [selectedJokeType, setSelectedJokeType] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
 
-   useEffect(() => {
-    getJockTypes()
-   }, [])
-   
+  useEffect(() => {
+    getJockTypes();
+  }, []);
 
   const getJockTypes = () => {
- jokeService.getJokeTypes().then((response) => {
-  setJockTypes(response.data.data);
- })
-  }
-
+    jokeService.getJokeTypes().then((response) => {
+      setJockTypes(response.data.data);
+    });
+  };
 
   const handleInputChange = (field: keyof JokeFormDto, value: string) => {
     setJokeFormData({
@@ -86,7 +86,7 @@ export default function Home() {
   };
 
   const handleJokeTypeChange = (event: SelectChangeEvent) => {
-    setSelectedJokeType(event.target.value)
+    setSelectedJokeType(event.target.value);
   };
 
   const handleGetNewJock = () => {
@@ -111,11 +111,9 @@ export default function Home() {
         author: {
           ...jokeFormData.author,
           value: response.data.data.author,
-        }
-
-      })
-    })
-    
+        },
+      });
+    });
   };
 
   return (
@@ -142,55 +140,57 @@ export default function Home() {
         Welcome to Joke App!
       </Typography>
 
-  
-        <JokeCard
-          setup={jokeFormData.setup.value||'Select a joke type '}
-          punchline={jokeFormData.punchline.value||`click "Get a New Joke" button to see a joke here.`}
-          type={String(jokeFormData.type.value)}
-          author={jokeFormData.author.value}
-          isLoading={isLoading}
-        />
-      
+      <JokeCard
+        setup={jokeFormData.setup.value || "Select a joke type "}
+        punchline={
+          jokeFormData.punchline.value ||
+          `click "Get a New Joke" button to see a joke here.`
+        }
+        type={String(jokeFormData.type.value)}
+        author={jokeFormData.author.value}
+        isLoading={isLoading}
+      />
 
-      <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: 2, mt: 4 }}>
-
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-        <FormControl fullWidth >
-          <Select
-          fullWidth={true}
-            value={selectedJokeType}
-            onChange={handleJokeTypeChange}
-            displayEmpty={true}
-            sx={{ minWidth: 200 }}
-            disabled={isLoading}
-          >
-          {jockTypes.map((jockType) => (
-              <MenuItem key={jockType._id} value={jockType.name}>
-                {jockType.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          gap: 2,
+          mt: 4,
+        }}
+      >
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <FormControl fullWidth>
+              <Select
+                fullWidth={true}
+                value={selectedJokeType}
+                onChange={handleJokeTypeChange}
+                displayEmpty={true}
+                sx={{ minWidth: 200 }}
+                disabled={isLoading}
+              >
+                {jockTypes.map((jockType) => (
+                  <MenuItem key={jockType._id} value={jockType.name}>
+                    {jockType.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <CustomButton
+              variant="contained"
+              size="large"
+              backgroundColor="#4C02F1"
+              onClick={handleGetNewJock}
+              isLoading={isLoading}
+              height="2.5rem"
+              text={"Get a New Joke"}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-        <CustomButton
-          variant="contained"
-          size="large"
-          backgroundColor="#4C02F1"
-          onClick={handleGetNewJock}
-          isLoading={isLoading}
-          height="2.5rem"
-          text={
-            "Get a New Joke"
-          }
-        />
-        </Grid>
-        </Grid>
-       
-   
-          
-       
       </Box>
     </Box>
   );

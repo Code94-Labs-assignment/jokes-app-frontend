@@ -23,14 +23,17 @@ const useLogoutHandler = () => {
     };
 
     // Attach the interceptor
-    const requestInterceptor = axiosModerateJokesInstance.interceptors.response.use(
-      (response) => response,
-      handleAuthError
-    );
+    const requestInterceptor =
+      axiosModerateJokesInstance.interceptors.response.use(
+        (response) => response,
+        handleAuthError,
+      );
 
     // Clean up the interceptor when the component unmounts
     return () => {
-      axiosModerateJokesInstance.interceptors.response.eject(requestInterceptor);
+      axiosModerateJokesInstance.interceptors.response.eject(
+        requestInterceptor,
+      );
     };
   }, [logout, router]);
 };

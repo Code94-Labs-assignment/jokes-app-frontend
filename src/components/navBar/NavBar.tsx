@@ -21,7 +21,6 @@ const NavBar: React.FC = () => {
           <Button color="inherit" component={Link} href="/moderator-dashboard">
             Moderator Dashboard
           </Button>
-          
         </Box>
       </Toolbar>
     </AppBar>

@@ -20,4 +20,3 @@ export interface FormFieldDto<T> {
   min?: number;
   charLength?: number[];
 }
-

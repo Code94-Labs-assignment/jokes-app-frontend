@@ -75,7 +75,7 @@ const ModeratorDashboard = () => {
   };
 
   const [jokeFormData, setJokeFormData] = useState<JokeSubmitFormDto>(
-    INITIAL_JOKE_FORM_DATA
+    INITIAL_JOKE_FORM_DATA,
   );
   const [jockTypes, setJockTypes] = useState<JokeTypeDto[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -84,7 +84,9 @@ const ModeratorDashboard = () => {
   const [isHavePendingJoke, setIsHavePendingJoke] = useState(false);
 
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-  const [actionToConfirm, setActionToConfirm] = useState<"approve" | "reject">();
+  const [actionToConfirm, setActionToConfirm] = useState<
+    "approve" | "reject"
+  >();
 
   useEffect(() => {
     getJockTypes();
@@ -140,7 +142,7 @@ const ModeratorDashboard = () => {
   const handleInputChange = (field: keyof JokeFormDto, value: string) => {
     if (field === "type") {
       const selectedType: JokeTypeDto | undefined = jockTypes.find(
-        (type: JokeTypeDto) => type._id === value
+        (type: JokeTypeDto) => type._id === value,
       );
       setJokeFormData({
         ...jokeFormData,

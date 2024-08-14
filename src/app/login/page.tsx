@@ -53,24 +53,22 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-    const { mutate, isPending, isError, error, data } = useMutation<
-      AxiosResponse<any>,
-      Error,
-      loginPayload
-    >({
-      mutationFn: jokeService.Login,
-      onSuccess: (response) => {
-        toast.success("Login successful");
-        login()
-        localStorage.setItem("accessToken", response.data.data.token);
-        router.push("/moderator-dashboard");
-      },
-      onError: (error) => {
-       
-        toast.error("Login failed");
-      },
-    });
-
+  const { mutate, isPending, isError, error, data } = useMutation<
+    AxiosResponse<any>,
+    Error,
+    loginPayload
+  >({
+    mutationFn: jokeService.Login,
+    onSuccess: (response) => {
+      toast.success("Login successful");
+      login();
+      localStorage.setItem("accessToken", response.data.data.token);
+      router.push("/moderator-dashboard");
+    },
+    onError: (error) => {
+      toast.error("Login failed");
+    },
+  });
 
   const onInputHandleChange = (property: string, value: string) => {
     setLoginFormData({
@@ -99,12 +97,12 @@ const Login = () => {
     setHelperText(true);
     const [validateData, isValid] = await validateFormData(loginFormData);
     setLoginFormData(validateData);
-    if(isValid) {
-        const payload :loginPayload= {
-          email: loginFormData.email.value,
-          password: loginFormData.password.value,
-        };
-        mutate(payload);
+    if (isValid) {
+      const payload: loginPayload = {
+        email: loginFormData.email.value,
+        password: loginFormData.password.value,
+      };
+      mutate(payload);
     }
   };
 

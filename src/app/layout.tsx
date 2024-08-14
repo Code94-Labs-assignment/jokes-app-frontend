@@ -10,7 +10,6 @@ import NavBar from "@/components/navBar/NavBar";
 import ReactQueryProvider from "@/components/ReactQueryProvider";
 import Footer from "@/components/footer/Footer";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,32 +22,29 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
-      <body className={inter.className}
-      suppressHydrationWarning={true}
-      >
-      <ReactQueryProvider >
-        <NavBar />
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {children}
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            limit={2}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
-        </ThemeProvider>
-        <Footer/>
+      <body className={inter.className} suppressHydrationWarning={true}>
+        <ReactQueryProvider>
+          <NavBar />
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            {children}
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              limit={2}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
+          </ThemeProvider>
+          <Footer />
         </ReactQueryProvider>
       </body>
     </html>
