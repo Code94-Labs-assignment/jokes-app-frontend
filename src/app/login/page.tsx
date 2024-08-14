@@ -1,5 +1,5 @@
 "use client";
-import { loginFormDto } from "@/utilities/models";
+import { loginFormDto, loginPayload } from "@/utilities/models";
 import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./login.module.scss";
@@ -18,6 +18,13 @@ import {
 import { loginImage } from "../../assets/images/index";
 import CustomButton from "@/components/shared/CustomButton";
 import { validateFormData } from "@/utilities/helpers";
+import { jokeService } from "@/services/joke.service";
+import { useMutation } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
+import { SelectedAuthState, useAuthStore } from "@/zustandStore/useAuthStore";
+import { useRouter } from "next/navigation";
+
 const Login = () => {
   const INITIAL_RESET_FORM_DATA: loginFormDto = {
     email: {
@@ -41,8 +48,29 @@ const Login = () => {
   const [loginFormData, setLoginFormData] = useState<loginFormDto>(
     INITIAL_RESET_FORM_DATA,
   );
+  const login = useAuthStore((state: SelectedAuthState) => state.login);
   const [helperText, setHelperText] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
+    const { mutate, isPending, isError, error, data } = useMutation<
+      AxiosResponse<any>,
+      Error,
+      loginPayload
+    >({
+      mutationFn: jokeService.Login,
+      onSuccess: (response) => {
+        toast.success("Login successful");
+        login()
+        localStorage.setItem("accessToken", response.data.data.token);
+        router.push("/moderator-dashboard");
+      },
+      onError: (error) => {
+       
+        toast.error("Login failed");
+      },
+    });
+
 
   const onInputHandleChange = (property: string, value: string) => {
     setLoginFormData({
@@ -71,6 +99,13 @@ const Login = () => {
     setHelperText(true);
     const [validateData, isValid] = await validateFormData(loginFormData);
     setLoginFormData(validateData);
+    if(isValid) {
+        const payload :loginPayload= {
+          email: loginFormData.email.value,
+          password: loginFormData.password.value,
+        };
+        mutate(payload);
+    }
   };
 
   return (

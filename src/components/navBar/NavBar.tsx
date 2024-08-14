@@ -18,12 +18,10 @@ const NavBar: React.FC = () => {
           <Button color="inherit" component={Link} href="/submit-joke">
             Submit Joke
           </Button>
-          <Button color="inherit" component={Link} href="/moderator">
+          <Button color="inherit" component={Link} href="/moderator-dashboard">
             Moderator Dashboard
           </Button>
-          <Button color="inherit" component={Link} href="/login">
-            login
-          </Button>
+          
         </Box>
       </Toolbar>
     </AppBar>

@@ -1,7 +1,8 @@
+'use client';
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-interface SelectedAuthState {
+export interface SelectedAuthState {
   isAuthenticated: boolean;
   login: () => void;
   logout: () => void;
@@ -17,7 +18,8 @@ export const useAuthStore = create<SelectedAuthState>()(
       ...initialState,
 
       // Action to log in
-      login: () => set({ isAuthenticated: true }),
+      login: () =>{ 
+        set({ isAuthenticated: true })},
 
       // Action to log out
       logout: () => set({ isAuthenticated: false }),

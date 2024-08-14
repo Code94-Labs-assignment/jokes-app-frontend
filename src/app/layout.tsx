@@ -7,6 +7,9 @@ import theme from "@/assets/theme/theme";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NavBar from "@/components/navBar/NavBar";
+import ReactQueryProvider from "@/components/ReactQueryProvider";
+import Footer from "@/components/footer/Footer";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,9 +23,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className}
+      suppressHydrationWarning={true}
+      >
+      <ReactQueryProvider >
         <NavBar />
         <ThemeProvider theme={theme}>
           <CssBaseline />
@@ -41,6 +48,8 @@ export default function RootLayout({
             theme="light"
           />
         </ThemeProvider>
+        <Footer/>
+        </ReactQueryProvider>
       </body>
     </html>
   );

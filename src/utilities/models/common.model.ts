@@ -1,7 +1,7 @@
 import moment from "moment";
 
-export interface FormFieldDto<V> {
-  value: V;
+export interface FormFieldDto<T> {
+  value: T;
   validator:
     | "text"
     | "number"
@@ -20,3 +20,4 @@ export interface FormFieldDto<V> {
   min?: number;
   charLength?: number[];
 }
+

@@ -1,10 +1,10 @@
 import axios from "axios";
 import { exceptionHandler } from "../core";
-import { logout } from "../core/authUtils";
+import { clearAuthData  } from "../core/authUtils";
 
 // 1. Deliver Jokes Microservice (No Auth Required)
 export const axiosDeliverJokesInstance = axios.create({
-  baseURL: "http://localhost:9091", // Port for Deliver Jokes Microservice
+  baseURL: "http://localhost:9093", // Port for Deliver Jokes Microservice
 });
 
 axiosDeliverJokesInstance.interceptors.response.use(
@@ -32,7 +32,7 @@ axiosModerateJokesInstance.interceptors.response.use(
   (response: any) => response,
   async (error: { response: any }) => {
     if (error.response && error.response.status === 401) {
-      logout();
+      clearAuthData ();
     }
     return Promise.reject(await exceptionHandler(error.response));
   },
@@ -40,7 +40,7 @@ axiosModerateJokesInstance.interceptors.response.use(
 
 // 3. Submit Jokes Microservice (No Auth Required)
 export const axiosSubmitJokesInstance = axios.create({
-  baseURL: "http://localhost:9093",
+  baseURL: "http://localhost:9091",
 });
 
 axiosSubmitJokesInstance.interceptors.response.use(

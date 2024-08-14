@@ -14,6 +14,7 @@ interface CustomButtonProps {
   onClick: () => void;
   isLoading?: boolean;
   fullWidth?: boolean; // New prop to indicate loading state
+  hoverBackGroundColor?: string;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -26,6 +27,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   height = "2.125rem",
   textTransform = "capitalize",
   onClick,
+  hoverBackGroundColor="#437EF7",
   isLoading = false, // Default to false if not provided
 }) => {
   return (
@@ -35,6 +37,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         margin: "0.5rem",
         background: backgroundColor,
         color: color,
+        width: fullWidth ? "100%" : "auto",
         minWidth:
           size === "small" ? "5rem" : size === "large" ? "10rem" : "7rem",
         height: height,
@@ -43,7 +46,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         border: variant === "outlined" ? "1px solid #437EF7" : "none",
         position: "relative", // To position the loader correctly
         "&:hover": {
-          backgroundColor: "#437EF7",
+          backgroundColor:hoverBackGroundColor,
         },
       }}
       onClick={onClick}
