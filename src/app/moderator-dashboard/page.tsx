@@ -18,11 +18,7 @@ import ConfirmationModal from "@/components/ConfirmationModal/ConfirmationModal"
 import { SCREEN_MODES } from "@/utilities/constants/app.constants";
 
 const ModeratorDashboard = () => {
-  const isAuthenticated = useRequireAuth();
-  if (!isAuthenticated) {
-    return null;
-  }
-
+  // Hooks must be at the top level
   const INITIAL_JOKE_FORM_DATA: JokeSubmitFormDto = {
     status: {
       value: "",
@@ -73,25 +69,26 @@ const ModeratorDashboard = () => {
       error: null,
     },
   };
-
-  const [jokeFormData, setJokeFormData] = useState<JokeSubmitFormDto>(
-    INITIAL_JOKE_FORM_DATA,
-  );
+  const isAuthenticated = useRequireAuth();
+  const [jokeFormData, setJokeFormData] = useState<JokeSubmitFormDto>(INITIAL_JOKE_FORM_DATA);
   const [jockTypes, setJockTypes] = useState<JokeTypeDto[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [helperText, setHelperText] = useState(true);
   const [mode, setMode] = useState(SCREEN_MODES.EDIT);
   const [isHavePendingJoke, setIsHavePendingJoke] = useState(false);
-
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-  const [actionToConfirm, setActionToConfirm] = useState<
-    "approve" | "reject"
-  >();
+  const [actionToConfirm, setActionToConfirm] = useState<"approve" | "reject">();
 
   useEffect(() => {
     getJockTypes();
     getPendingJoke();
   }, []);
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
+
 
   const getJockTypes = () => {
     jokeService.getJokeTypes().then((response) => {
@@ -105,7 +102,6 @@ const ModeratorDashboard = () => {
       if (response.data.data === null) {
         setIsHavePendingJoke(false);
         setJokeFormData(INITIAL_JOKE_FORM_DATA);
-        return;
       } else {
         setIsHavePendingJoke(true);
         setJokeFormData({
@@ -142,7 +138,7 @@ const ModeratorDashboard = () => {
   const handleInputChange = (field: keyof JokeFormDto, value: string) => {
     if (field === "type") {
       const selectedType: JokeTypeDto | undefined = jockTypes.find(
-        (type: JokeTypeDto) => type._id === value,
+        (type: JokeTypeDto) => type._id === value
       );
       setJokeFormData({
         ...jokeFormData,
@@ -318,5 +314,6 @@ const ModeratorDashboard = () => {
 };
 
 export default dynamic(() => Promise.resolve(ModeratorDashboard), {
-  ssr: false,
-});
+    ssr: false,
+  });
+
